@@ -4,5 +4,6 @@ from . import views as v
 urlpatterns = [
     path('login',v.MyTokenObtainPairView.as_view() , name='login'),
     path('register' , v.registerUser , name='register'),
-    path('profile' , v.getUserProfile , name='user profile')
+    path('profile' , v.getUserProfile , name='user profile'),
+    path('participant',v.register_part, name='register participant')
 ]

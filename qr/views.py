@@ -5,9 +5,11 @@ from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import IsAdminUser,IsAuthenticated
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from .serializer import UserSerializerWithToken,UserSerrializer
+from .models import participant , scan_data
+from .serializer import UserSerializerWithToken,UserSerrializer,particSerializer
 from rest_framework.response import Response
-from rest_framework import status
+
+import qrcode
 
 #------------------------login---------------------------------------------
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -49,3 +51,16 @@ def getUserProfile(request):
     return Response(serializers.data)
 #-----------------------------------------------------------------------------------------------------
 
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def register_part(request):
+    data=request.data
+    img=qrcode.make(f"name{data['name']} , email:{data['email']} ")
+    user=participant.objects.create(
+        name=data['name'],
+        last_name=data['last_name'],
+        email=data['email'],
+        qr_code=img.save(f"/home/speedweed/Desktop/QR/backend/upload{data['name']}_{data['last_name']}.png")
+    )
+    serializer=particSerializer(user,many=False)
+    return Response(serializer.data)

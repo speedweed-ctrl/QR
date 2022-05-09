@@ -1,4 +1,5 @@
 
+from distutils.command.upload import upload
 from pyexpat import model
 from django.contrib.auth.models import User
 from django.db import models
@@ -8,7 +9,7 @@ class participant(models.Model):
     name=models.CharField(max_length=60 , blank=True)
     last_name=models.CharField(max_length=60 , blank=True)
     email=models.EmailField(blank=True)
-    qr_code=models.ImageField(default='')
+    qr_code=models.FileField(upload_to='upload/')
     created=models.DateTimeField(auto_now_add=True)
 
     class Meta:

@@ -45,11 +45,13 @@ class UserSerializerWithToken(UserSerrializer):
         return str(token.access_token)
 #----------------------------------------------------------------------------------------
 class particSerializer(serializers.ModelSerializer):
+    qr_code=serializers.FileField()
     class Meta:
         model=participant
         fields='__all__'
 
 class scanSerializer(serializers.ModelSerializer):
+    user=serializers.CharField()
     class Meta:
         model=scan_data
         fields='__all__'

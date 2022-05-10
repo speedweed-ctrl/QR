@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAdminUser,IsAuthenticated
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from .models import participant , scan_data
-from .serializer import UserSerializerWithToken,UserSerrializer,particSerializer
+from .serializer import UserSerializerWithToken,UserSerrializer,particSerializer, scanSerializer
 from rest_framework.response import Response
 
 import qrcode
@@ -59,8 +59,22 @@ def register_part(request):
     user=participant.objects.create(
         name=data['name'],
         last_name=data['last_name'],
-        email=data['email'],
-        qr_code=img.save(f"/home/speedweed/Desktop/QR/backend/upload{data['name']}_{data['last_name']}.png")
+        email=data['email'], 
     )
     serializer=particSerializer(user,many=False)
     return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_scan_data(request,pk):
+    data=scan_data.objects.filter(user=pk)
+    serializer=scanSerializer(data,many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def get_all_scans(request):
+    data=scan_data.objects.all().order_by('number_scans')
+    serializer=scanSerializer(data,many=True)
+    return Response(serializer.data)
+

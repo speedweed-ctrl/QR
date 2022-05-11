@@ -22,7 +22,7 @@ class participant(models.Model):
     
     
     def save(self, *args, **kwargs):
-        qrcode_img = qrcode.make(f"{self.name}") 
+        qrcode_img = qrcode.make(f"{self.name} , {self.last_name}") 
         canvas = Image.new('RGB', (290, 290), 'white')
         canvas.paste(qrcode_img)
         fname = f'{self.name}_{self.last_name}.png'
@@ -35,6 +35,7 @@ class participant(models.Model):
     
 class scan_data(models.Model):
     user=models.ForeignKey(User , on_delete=models.CASCADE)
+    scnanned= models.ForeignKey(participant,on_delete=models.Case , null=True,blank=True)
     number_scans=models.IntegerField(default=0)
     last_scan=models.DateTimeField(auto_now_add=True)  
 

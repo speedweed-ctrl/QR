@@ -4,8 +4,12 @@ module.exports = {
     extend: {
       colors:{
         cl:'#3F1651',
-        ha:'#DE3B3C'
-      }
+        ha:'#DE3B3C',
+        mainwhite:'#F5F5F5',
+      },
+      fontFamily: {
+        Avalon:['Avalon','cursive']
+      },
     },
   },
   plugins: [],

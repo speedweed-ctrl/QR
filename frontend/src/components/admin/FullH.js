@@ -2,18 +2,19 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react'
 import { BsUpcScan } from 'react-icons/bs'
+import { ImUser } from 'react-icons/im'
 
 
 const ScanH = () => {
     const [data,setData]=useState([])
     const[count,setCount]=useState([])
     const config = {
-        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyODIyMjY2LCJpYXQiOjE2NTIyMTc0NjYsImp0aSI6ImI2YWQ2Yzc1MTE2NDRlYzc5YWZlZmNlMGYzM2ExMWI3IiwidXNlcl9pZCI6Mn0.jQBxsech2go35aPVEho1iUm51Iwicn9t681ysA9uHJI'}
+        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMzQ3OTM1LCJpYXQiOjE2NTI3NDMxMzUsImp0aSI6IjI3NjQ3ZDBkZjU5MTQwM2Y4NWFiNmEyZDAyNmJjMWNlIiwidXNlcl9pZCI6M30.dPd2o9YLk6uZPCPMqhwCYvp6z3SssbRKNu8-Aus7Pjc'}
     };
     
     useEffect(()=>{
         const getData=async()=>{
-            const {data}= await axios.get('http://192.168.1.11:8000/api/user_scan/2',config)
+            const {data}= await axios.get('http://192.168.1.11:8000/api/all_scans',config)
             setData(data)
         }
        
@@ -34,7 +35,8 @@ const ScanH = () => {
 
                             {data.map((datum)=>{
                                 return (
-                                    <div className="flex flex-row bg-mainwhite shadow-sm rounded p-4 mb-5">
+                                    <>
+                                    <div className="flex flex-row bg-mainwhite shadow-sm rounded p-4 ">
                                         <div className="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
                                             <BsUpcScan></BsUpcScan>
                                         </div>
@@ -43,7 +45,16 @@ const ScanH = () => {
                                             <div className="font-bold text-lg">{datum.scnanned}</div>              
                                         </div>
                                     </div>   
-                                    
+                                    <div className="flex flex-row bg-mainwhite shadow-sm rounded p-4 mb-5">
+                                    <div className="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
+                                        <ImUser></ImUser>
+                                    </div>
+                                    <div className="flex flex-col flex-grow ml-4">
+                                        <div className="text-sm text-gray-500">by</div>
+                                        <div className="font-bold text-lg">{datum.user}</div>              
+                                    </div>
+                                </div>   
+                                    </>
                                          
                                 )
                             })}

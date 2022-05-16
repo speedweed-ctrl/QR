@@ -11,6 +11,7 @@ class participant(models.Model):
     name=models.CharField(max_length=60 , blank=True)
     last_name=models.CharField(max_length=60 , blank=True)
     email=models.EmailField(blank=True)
+    cin=models.IntegerField()
     qr_code=models.FileField(blank=True)
     created=models.DateTimeField(auto_now_add=True)
 
@@ -35,7 +36,7 @@ class participant(models.Model):
     
 class scan_data(models.Model):
     user=models.ForeignKey(User , on_delete=models.CASCADE)
-    scnanned= models.ForeignKey(participant,on_delete=models.Case , null=True,blank=True)
+    scnanned= models.ForeignKey(participant,on_delete=models.Case , null=True,blank=True,related_name='partdata')
     number_scans=models.IntegerField(default=0)
     last_scan=models.DateTimeField(auto_now_add=True)  
 

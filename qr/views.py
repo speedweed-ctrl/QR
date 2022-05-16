@@ -55,11 +55,11 @@ def getUserProfile(request):
 @permission_classes([IsAdminUser])
 def register_part(request):
     data=request.data
-    img=qrcode.make(f"name{data['name']} , email:{data['email']} ")
     user=participant.objects.create(
         name=data['name'],
         last_name=data['last_name'],
         email=data['email'], 
+        cin=data['cin']
     )
     serializer=particSerializer(user,many=False)
     return Response(serializer.data)
@@ -82,7 +82,7 @@ def get_scan_data_latest(request,pk):
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def get_all_scans(request):
-    data=scan_data.objects.all().order_by('number_scans')
+    data=scan_data.objects.all()
     serializer=scanSerializer(data,many=True)
     return Response(serializer.data)
 

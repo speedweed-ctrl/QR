@@ -2,7 +2,8 @@ import React from 'react'
 import no from './no.png'
 import { Link } from 'react-router-dom'
 const AdminNav = () => {
-    const user='a'
+    const sta=window.localStorage.getItem('status')
+    
   return (
     <div className="lg:flex">
     <div className="lg:w-1/2 xl:max-w-screen-sm">
@@ -10,7 +11,7 @@ const AdminNav = () => {
         <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
             <h2 className="text-center font-Avalon text-4xl text-cl font-display font-semibold lg:text-left xl:text-5xl
             xl:text-bold">overseer </h2>
-            {user?
+            {sta?
                     <div className="mt-16">
                 
                     <div className='mb-5 '>

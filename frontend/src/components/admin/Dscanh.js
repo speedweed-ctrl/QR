@@ -2,26 +2,27 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react'
 import { BsUpcScan } from 'react-icons/bs'
-import useLogin from './../auth/Login';
+import { useParams } from 'react-router-dom'
+
 
 const ScanH = () => {
     const [data,setData]=useState([])
     const[count,setCount]=useState([])
-    const user=useLogin(state=>state.user)
+    const {user}=useParams()
+    console.log(user)
     const config = {
         headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyODIyMjY2LCJpYXQiOjE2NTIyMTc0NjYsImp0aSI6ImI2YWQ2Yzc1MTE2NDRlYzc5YWZlZmNlMGYzM2ExMWI3IiwidXNlcl9pZCI6Mn0.jQBxsech2go35aPVEho1iUm51Iwicn9t681ysA9uHJI'}
     };
     
     useEffect(()=>{
         const getData=async()=>{
-            const {data}= await axios.get(`http://192.168.1.11:8000/api/user_scan/${user._id}`,config)
+            const {data}= await axios.get(`http://192.168.1.11:8000/api/user_scan/${user}`,config)
             setData(data)
         }
        
         getData()
     },[])
     console.log(data)
-
     
   return (
     <div className="lg:flex">

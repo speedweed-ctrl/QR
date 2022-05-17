@@ -6,6 +6,12 @@ import ScanH from "./components/main/ScanH";
 import {  Routes,Route } from 'react-router-dom'
 import RegisterPar from "./components/admin/RegisterPar";
 import FullH from './components/admin/FullH'
+import History from "./components/admin/History";
+import Dscanh from './components/admin/Dscanh'
+import create from 'zustand';
+
+
+
 
 function App() {
   return (
@@ -16,6 +22,8 @@ function App() {
         <Route path='/sign' element={<Register/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/admin' element={<AdminNav/>}/>
+        <Route path='/adminH' element={<History/>}/>
+        <Route path='/Dscan/:user' element={<Dscanh/>}/>
         <Route path='/rpart' element={<RegisterPar/>}/>
         <Route path='/detail' element={<ScanH/>}/>    
         <Route path='/fscan' element={<FullH/>}/>      

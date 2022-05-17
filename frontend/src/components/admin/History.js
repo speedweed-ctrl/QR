@@ -1,27 +1,26 @@
 
 import axios from 'axios';
 import React,{useState,useEffect} from 'react'
-import { BsUpcScan } from 'react-icons/bs'
-import useLogin from './../auth/Login';
+import { AiOutlineUser } from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 
-const ScanH = () => {
+
+const History = () => {
     const [data,setData]=useState([])
     const[count,setCount]=useState([])
-    const user=useLogin(state=>state.user)
     const config = {
-        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyODIyMjY2LCJpYXQiOjE2NTIyMTc0NjYsImp0aSI6ImI2YWQ2Yzc1MTE2NDRlYzc5YWZlZmNlMGYzM2ExMWI3IiwidXNlcl9pZCI6Mn0.jQBxsech2go35aPVEho1iUm51Iwicn9t681ysA9uHJI'}
+        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMzk3MzE2LCJpYXQiOjE2NTI3OTI1MTYsImp0aSI6IjFjZDk5MWI4MDgxNTQwNmI5YWZhZDg0ODliMGMwZTg4IiwidXNlcl9pZCI6M30.w-tINBvuouMv7SKJ8JCqYQKo2L7eaSGfx_zfOcuMN-k'}
     };
     
     useEffect(()=>{
         const getData=async()=>{
-            const {data}= await axios.get(`http://192.168.1.11:8000/api/user_scan/${user._id}`,config)
+            const {data}= await axios.get('http://192.168.1.11:8000/api/users',config)
             setData(data)
         }
        
         getData()
     },[])
     console.log(data)
-
     
   return (
     <div className="lg:flex">
@@ -31,20 +30,19 @@ const ScanH = () => {
                     <h2 className="text-center font-Avalon text-4xl text-cl font-display font-semibold lg:text-left xl:text-5xl
                     xl:text-bold">welcom back hacker  </h2><br/>
                     <h2 className="text-center font-Avalon text-2xl text-cl font-display font-semibold lg:text-left xl:text-5xl
-                    xl:text-bold">total scans : {data.length} </h2>
+                    xl:text-bold">total users: {data.length} </h2>
                     <div className="mt-7 pb-4">
-
                             {data.map((datum)=>{
                                 return (
-                                    <div className="flex flex-row bg-mainwhite shadow-sm rounded p-4 mb-5">
+                                    <Link to={`/Dscan/${datum._id}`}  className="flex flex-row bg-mainwhite shadow-sm rounded p-4 mb-5">
                                         <div className="flex items-center justify-center flex-shrink-0 h-12 w-12 rounded-xl bg-blue-100 text-blue-500">
-                                            <BsUpcScan></BsUpcScan>
+                                            <AiOutlineUser></AiOutlineUser>
                                         </div>
                                         <div className="flex flex-col flex-grow ml-4">
-                                            <div className="text-sm text-gray-500">participant</div>
-                                            <div className="font-bold text-lg">{datum.scnanned}</div>              
+                                            <div className="text-sm text-gray-500">username</div>
+                                            <div className="font-bold text-lg">{datum.username}</div>              
                                         </div>
-                                    </div>   
+                                    </Link>   
                                     
                                          
                                 )
@@ -62,4 +60,4 @@ const ScanH = () => {
   )
 }
 
-export default ScanH
+export default History

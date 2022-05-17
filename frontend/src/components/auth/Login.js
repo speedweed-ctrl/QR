@@ -9,7 +9,7 @@ const Login = () => {
 
     const submiHandler =async (e)=>{
         e.preventDefault()
-       const {data} = await axios.post('http://127.0.0.1:8000/api/login',{
+       const {data} = await axios.post('http://192.168.1.11:8000/api/login',{
             username:user,
             password:pass
         })

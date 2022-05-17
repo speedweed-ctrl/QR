@@ -17,10 +17,10 @@ const AdminNav = () => {
                         <Link to='/rpart' className='text-center text-3xl font-Avalon text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'> --&gt;Register participant&lt;--</Link> 
                     </div>
                     <div className='mb-5'>
-                       <Link to=''className='text-center text-3xl font-Avalon  text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'> --&gt;delete participant&lt;--</Link> 
+                       <Link to='/adminH'className='text-center text-3xl font-Avalon  text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'> --&gt;scan history&lt;--</Link> 
                     </div>
                     <div className='mb-5'>
-                       <Link to='' className='text-center text-3xl font-Avalon  text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'> --&gt;full scan history&lt;--</Link> 
+                       <Link to='/fscan' className='text-center text-3xl font-Avalon  text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'> --&gt;full scan history&lt;--</Link> 
                     </div>       
             </div>:
             <img src={no}></img>

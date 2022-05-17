@@ -7,8 +7,10 @@ const RegisterPar = () => {
     const[name,setname]=useState('')
     const[last,setlast]=useState('')
     const[mail,setmail]=useState('')
+    const token=window.localStorage.getItem('token')
+    
     const config = {
-        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMzQ0NDM0LCJpYXQiOjE2NTI3Mzk2MzQsImp0aSI6IjJkN2U2MDhmM2U4MDQxYjhiYmVhZmE3MzkwOGE0ZTcxIiwidXNlcl9pZCI6M30.pSbUb9K4evOK6_DC5S4w9FRMYZBzbwnGVXBYm8wto0o'}
+        headers: { Authorization: `Bearer ${token}`}
     };
     const submiHandler =async (e)=>{
         e.preventDefault()
@@ -22,6 +24,10 @@ const RegisterPar = () => {
         },config)
         console.log(data)
 
+    }
+    const user=window.localStorage.getItem('user')
+    if(!user){
+        window.location.replace('/login')
     }
   return (
     <div className="lg:flex">

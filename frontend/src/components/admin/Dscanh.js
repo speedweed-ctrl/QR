@@ -9,9 +9,10 @@ const ScanH = () => {
     const [data,setData]=useState([])
     const[count,setCount]=useState([])
     const {user}=useParams()
+    const token=window.localStorage.getItem('token')
     console.log(user)
     const config = {
-        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUyODIyMjY2LCJpYXQiOjE2NTIyMTc0NjYsImp0aSI6ImI2YWQ2Yzc1MTE2NDRlYzc5YWZlZmNlMGYzM2ExMWI3IiwidXNlcl9pZCI6Mn0.jQBxsech2go35aPVEho1iUm51Iwicn9t681ysA9uHJI'}
+        headers: { Authorization: `Bearer ${token} `}
     };
     
     useEffect(()=>{
@@ -23,7 +24,10 @@ const ScanH = () => {
         getData()
     },[])
     console.log(data)
-    
+    const user1=window.localStorage.getItem('user')
+    if(!user1){
+        window.location.replace('/login')
+    }
   return (
     <div className="lg:flex">
         <div className="lg:w-1/2 xl:max-w-screen-sm">

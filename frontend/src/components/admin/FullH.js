@@ -8,8 +8,10 @@ import { ImUser } from 'react-icons/im'
 const ScanH = () => {
     const [data,setData]=useState([])
     const[count,setCount]=useState([])
+    const token=window.localStorage.getItem('token')
+
     const config = {
-        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMzQ3OTM1LCJpYXQiOjE2NTI3NDMxMzUsImp0aSI6IjI3NjQ3ZDBkZjU5MTQwM2Y4NWFiNmEyZDAyNmJjMWNlIiwidXNlcl9pZCI6M30.dPd2o9YLk6uZPCPMqhwCYvp6z3SssbRKNu8-Aus7Pjc'}
+        headers: { Authorization: `Bearer ${token} `}
     };
     
     useEffect(()=>{
@@ -21,7 +23,10 @@ const ScanH = () => {
         getData()
     },[])
     console.log(data)
-    
+    const user=window.localStorage.getItem('user')
+    if(!user){
+        window.location.replace('/login')
+    }
   return (
     <div className="lg:flex">
         <div className="lg:w-1/2 xl:max-w-screen-sm">

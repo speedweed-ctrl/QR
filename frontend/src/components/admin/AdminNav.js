@@ -3,7 +3,11 @@ import no from './no.png'
 import { Link } from 'react-router-dom'
 const AdminNav = () => {
     const sta=window.localStorage.getItem('status')
-    
+    const user=window.localStorage.getItem('user')
+    console.log(sta)
+    if(!user){
+        window.location.replace('/login')
+    }
   return (
     <div className="lg:flex">
     <div className="lg:w-1/2 xl:max-w-screen-sm">

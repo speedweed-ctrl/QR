@@ -18,6 +18,10 @@ const Register = () => {
             email:mail,
             password:passs,
         })
+        window.localStorage.setItem('user',data._id)
+        window.localStorage.setItem('token',data.access)
+        window.localStorage.setItem('status',data.isAdmin)
+        window.location.replace('/detail')
         console.log(data)
 
     }

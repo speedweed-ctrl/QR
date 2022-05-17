@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom';
 const History = () => {
     const [data,setData]=useState([])
     const[count,setCount]=useState([])
+    const token=window.localStorage.getItem('token')
+
     const config = {
-        headers: { Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjUzMzk3MzE2LCJpYXQiOjE2NTI3OTI1MTYsImp0aSI6IjFjZDk5MWI4MDgxNTQwNmI5YWZhZDg0ODliMGMwZTg4IiwidXNlcl9pZCI6M30.w-tINBvuouMv7SKJ8JCqYQKo2L7eaSGfx_zfOcuMN-k'}
+        headers: { Authorization: `Bearer ${token}`}
     };
     
     useEffect(()=>{
@@ -21,7 +23,10 @@ const History = () => {
         getData()
     },[])
     console.log(data)
-    
+    const user=window.localStorage.getItem('user')
+    if(!user){
+        window.location.replace('/login')
+    }
   return (
     <div className="lg:flex">
         <div className="lg:w-1/2 xl:max-w-screen-sm">

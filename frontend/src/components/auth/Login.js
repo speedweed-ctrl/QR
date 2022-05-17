@@ -13,11 +13,12 @@ const Login = () => {
             username:user,
             password:pass
         })
-        console.log(data)
         window.localStorage.setItem('user',data._id)
         window.localStorage.setItem('token',data.access)
         window.localStorage.setItem('status',data.isAdmin)
-
+        window.location.replace('/detail')
+        console.log(data)
+        
     }
 
 

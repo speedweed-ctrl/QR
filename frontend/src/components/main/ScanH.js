@@ -23,10 +23,13 @@ const ScanH = () => {
         getData()
     },[])
     console.log(data)
-    window.localStorage.getItem('user')
 
     
-  return (
+    if(!user){
+        window.location.replace('/login')
+    }
+  
+    return (
     <div className="lg:flex">
         <div className="lg:w-1/2 xl:max-w-screen-sm">
             

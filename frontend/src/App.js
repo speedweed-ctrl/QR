@@ -9,6 +9,7 @@ import FullH from './components/admin/FullH'
 import History from "./components/admin/History";
 import Dscanh from './components/admin/Dscanh'
 import create from 'zustand';
+import Scaner from "./components/main/Scaner";
 
 
 
@@ -18,6 +19,7 @@ function App() {
     <div className="App">
       <Header></Header>
         <Routes>
+        <Route path='/' element={<Scaner/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/sign' element={<Register/>}/>
         <Route path='/register' element={<Register/>}/>

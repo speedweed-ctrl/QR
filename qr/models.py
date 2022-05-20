@@ -1,6 +1,7 @@
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import CharField
 import qrcode 
 from django.core.files import File 
 from PIL import Image
@@ -12,6 +13,7 @@ class participant(models.Model):
     last_name=models.CharField(max_length=60 , blank=True)
     email=models.EmailField(blank=True)
     cin=models.IntegerField()
+    uid=models.CharField(max_length=100)
     qr_code=models.FileField(blank=True)
     created=models.DateTimeField(auto_now_add=True)
 
@@ -23,7 +25,7 @@ class participant(models.Model):
     
     
     def save(self, *args, **kwargs):
-        qrcode_img = qrcode.make(f'{self.name}.{self.last_name}.{self.cin}') 
+        qrcode_img = qrcode.make(f'{self.name}.{self.last_name}.{self.cin}.{self.uid}') 
         canvas = Image.new('RGB', (400, 400), 'white')
         canvas.paste(qrcode_img)
         fname = f'{self.name}_{self.last_name}.png'
@@ -38,6 +40,7 @@ class scan_data(models.Model):
     user=models.ForeignKey(User , on_delete=models.CASCADE)
     scnanned= models.CharField(max_length=100)
     cin= models.CharField(max_length=100 , null=True,blank=True)
+    uid=models.CharField(max_length=100)
     last_scan=models.DateTimeField(auto_now_add=True)  
 
     def __str__(self):

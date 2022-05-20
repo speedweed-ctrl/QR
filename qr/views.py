@@ -8,6 +8,7 @@ from django.contrib.auth.hashers import make_password
 from .models import participant , scan_data
 from .serializer import UserSerializerWithToken,UserSerrializer,particSerializer, scanSerializer
 from rest_framework.response import Response
+import uuid
 
 import qrcode
 
@@ -65,7 +66,8 @@ def register_part(request):
         name=data['name'],
         last_name=data['last_name'],
         email=data['email'], 
-        cin=data['cin']
+        cin=data['cin'],    
+        uid=uuid.uuid4().hex[:6].upper(),
     )
     serializer=particSerializer(user,many=False)
     return Response(serializer.data)
@@ -78,7 +80,8 @@ def add_scann(request):
     scan=scan_data.objects.create(
         user=userk,
         scnanned=data['part'],
-        cin=data['cin']
+        cin=data['cin'],
+        uid=data['uid']
     )
     serializer=scanSerializer(scan,many=False)
     return Response(serializer.data)

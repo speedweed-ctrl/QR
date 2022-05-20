@@ -8,13 +8,15 @@ const RegisterPar = () => {
     const[last,setlast]=useState('')
     const[mail,setmail]=useState('')
     const token=window.localStorage.getItem('token')
-    
+    const [erm,setErm]=useState(false)
+
     const config = {
         headers: { Authorization: `Bearer ${token}`}
     };
     const submiHandler =async (e)=>{
         e.preventDefault()
-       const {data} = await axios.post('http://192.168.1.11:8000/api/participant',{
+        try{
+            const {data} = await axios.post('http://192.168.1.11:8000/api/participant',{
             name:name,
             last_name:last,
             email:mail,
@@ -23,6 +25,10 @@ const RegisterPar = () => {
             
         },config)
         console.log(data)
+        }catch(error){
+            setErm(true)
+        }
+       
 
     }
     const user=window.localStorage.getItem('user')
@@ -30,6 +36,15 @@ const RegisterPar = () => {
         window.location.replace('/login')
     }
   return (
+      <>
+       {
+            erm? <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Holy smokes!</strong>
+            <span class="block sm:inline">somthing went wrong try again later</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            </span>
+          </div>:<></>
+        }
     <div className="lg:flex">
                 <div className="lg:w-1/2 xl:max-w-screen-sm">
                     
@@ -74,6 +89,7 @@ const RegisterPar = () => {
                     </div>
                 </div>
             </div>
+            </>
   )
 }
 

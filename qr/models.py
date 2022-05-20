@@ -23,8 +23,8 @@ class participant(models.Model):
     
     
     def save(self, *args, **kwargs):
-        qrcode_img = qrcode.make(f"{self.name} , {self.last_name}") 
-        canvas = Image.new('RGB', (290, 290), 'white')
+        qrcode_img = qrcode.make(f'{self.name}.{self.last_name}.{self.cin}') 
+        canvas = Image.new('RGB', (400, 400), 'white')
         canvas.paste(qrcode_img)
         fname = f'{self.name}_{self.last_name}.png'
         buffer = BytesIO()
@@ -36,8 +36,8 @@ class participant(models.Model):
     
 class scan_data(models.Model):
     user=models.ForeignKey(User , on_delete=models.CASCADE)
-    scnanned= models.ForeignKey(participant,on_delete=models.Case , null=True,blank=True,related_name='partdata')
-    number_scans=models.IntegerField(default=0)
+    scnanned= models.CharField(max_length=100)
+    cin= models.CharField(max_length=100 , null=True,blank=True)
     last_scan=models.DateTimeField(auto_now_add=True)  
 
     def __str__(self):

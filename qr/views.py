@@ -70,6 +70,18 @@ def register_part(request):
     serializer=particSerializer(user,many=False)
     return Response(serializer.data)
 
+@api_view(['post'])
+@permission_classes([IsAuthenticated])
+def add_scann(request):
+    data=request.data
+    userk=request.user
+    scan=scan_data.objects.create(
+        user=userk,
+        scnanned=data['part'],
+        cin=data['cin']
+    )
+    serializer=scanSerializer(scan,many=False)
+    return Response(serializer.data)
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_scan_data(request,pk):

@@ -52,7 +52,6 @@ class particSerializer(serializers.ModelSerializer):
 
 class scanSerializer(serializers.ModelSerializer):
     user=serializers.CharField()
-    scnanned=serializers.CharField()
     class Meta:
         model=scan_data
         fields='__all__'

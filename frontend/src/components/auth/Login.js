@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios  from 'axios'
 import React , {useState} from 'react'
 
 
@@ -7,9 +7,11 @@ const Login = () => {
     const [user,setUser]=useState('')
     const[pass,setPass]=useState('')
 
+      
+
     const submiHandler =async (e)=>{
         e.preventDefault()
-       const {data} = await axios.post('http://192.168.1.11:8000/api/login',{
+       const {data} = await axios.post('https://192.168.1.11:8000/api/login',{
             username:user,
             password:pass
         })
